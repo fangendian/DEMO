@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			text-decoration: none;
+		}
+		li {
+			list-style: none;
+		}
+		li img {
+			width: 100%;
+		}
+		ul {
+			margin: 50px;
+		}
+	</style>
+</head>
+<body>
+	<h3>图片标题</h3>
+	<ul>
+		<li><a href="img/banner-1.jpg">1</a></li>
+		<li><a href="img/banner-2.jpg">2</a></li>
+		<li><a href="img/banner-3.jpg">3</a></li>
+		<li><a href="img/banner-4.jpg">4</a></li>
+		<li><a href="img/banner-5.jpg">5</a></li>
+	</ul>
+	<img id="img" src="img/banner-1.jpg" width="700" height="400"/>
+</body>
+<script type="text/javascript">
+	var a = document.getElementsByTagName('a');
+	var img = document.getElementById('img');
+	for(var i = 0; i < a.length; i++){
+		a[i].index = i;
+		a[i].onclick = function(e){
+			var e = e || window.event;
+			e.preventDefault() ? e.preventDefault() : e.returnValue = false;
+			if(e.preventDefault){
+				e.preventDefault();
+			}else{
+				e.returnValue = false;
+			}
+			for(var j = 0; j < a.length; j++){
+				var souce = a[j].getAttribute('href');
+				img.setAttribute('src',souce);
+			}
+			var souce = a[this.index].getAttribute('href');
+			img.setAttribute('src',souce);
+		}
+	}
+</script>
+</html>

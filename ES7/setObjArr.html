@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="ipt1" value="" />
+	<input type="text" id="ipt2" value="" />
+	<button id="btn">add</button>
+	<script type="text/javascript">
+		var ipt1 = document.getElementById('ipt1'),ipt2 = document.getElementById('ipt2'),btn = document.getElementById('btn');
+		var newList = [];
+		btn.onclick = function(){
+			var list = {};
+			list.name = ipt1.value
+			list.age = ipt2.value;
+			newList.push(list)
+			function obj2key(obj, keys){
+			    var n = keys.length,key = [];
+			    while(n--){
+			        key.push(obj[keys[n]]);
+			    }
+			    return key.join('|');
+			}
+			function uniqeByKeys(array,keys){
+			    var arr = [];
+			    var hash = {};
+			    for (var i = 0, j = array.length; i < j; i++) {
+			        var k = obj2key(array[i], keys);
+			        if (!(k in hash)) {
+			            hash[k] = true;
+			            arr.push(array[i]);
+			        }
+			    }
+			    return arr ;
+			}
+			var arr = uniqeByKeys(newList,['name','age']);
+			console.log(arr);
+
+		};
+//		var str = window.localStorage;
+//		str.setItem('name',JSON.stringify(textList));
+//		console.log(JSON.parse(localStorage.getItem('name')))
+
+		
+	</script>
+</body>
+</html>

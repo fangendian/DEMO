@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>模仿电梯</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.box {
+			width: 500px;
+			position: relative;
+			margin: 10px;
+		}
+		.one {
+			width: 300px;
+			height: 20px;
+			background: rgba(0,0,0,0.3);
+			margin-bottom: 20px;
+		}
+		.move-box {
+			width: 100px;
+			height: 20px;
+			background: aqua;
+			position: absolute;
+			left: 310px;
+			top: 0;
+		}
+		.num-box {
+			width: 300px;
+			position: absolute;
+			right: 100px;
+			top: 50px;
+		}
+		.number {
+			font-size: 0;
+		}
+		.number span {
+			width: 24px;
+			height: 24px;
+			text-align: center;
+			line-height: 24px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			display: inline-block;
+			border-radius: 50%;
+			margin: 0 8px 12px 8px;
+			cursor: hand;
+			cursor: pointer;
+		}
+		.show {
+			background: orangered;
+			color: #fff;
+			border: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="num-box">
+		<div class="number">
+			<span>1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+			<span>6</span>
+			<span>7</span>
+			<span>8</span>
+			<span>9</span>
+			<span>10</span>
+			<span>11</span>
+			<span>12</span>
+			<span>13</span>
+			<span>14</span>
+			<span>15</span>
+		</div>
+	</div>
+	<div class="box">
+		<div class="elevator">
+			<div class="one">第一层</div>
+			<div class="one">第二层</div>
+			<div class="one">第三层</div>
+			<div class="one">第四层</div>
+			<div class="one">第五层</div>
+			<div class="one">第六层</div>
+			<div class="one">第七层</div>
+			<div class="one">第八层</div>
+			<div class="one">第九层</div>
+			<div class="one">第十层</div>
+			<div class="one">第十一层</div>
+			<div class="one">第十二层</div>
+			<div class="one">第十三层</div>
+			<div class="one">第十四层</div>
+			<div class="one">第十五层</div>
+		</div>
+		<div class="move-box" id="move"></div>
+	</div>
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	var state = true,arr = [],num = 0;
+	$('.number span').each(function(index){
+		$(this).click(function(){
+			arr.push(index)
+			arr = arr.length > 2 ? arr.splice(1) : arr;
+			num = arr.length > 1 ? Math.abs(arr[1] - arr[0]) : index;
+			setTimeout(function(){
+				$('#move').stop().animate({
+					top: index * 40
+				},350 * num);
+				setTimeout(function(){
+					
+				},1500)
+			},1500);
+		});
+	});
+	function scroll() {
+        if(window.pageYOffset != null){  //  ie9+ 和其他浏览器
+            return {
+                left: window.pageXOffset,
+                top: window.pageYOffset
+            }
+        }
+        else if(document.compatMode == "CSS1Compat"){  // 声明的了 DTD
+          // 检测是不是怪异模式的浏览器 -- 就是没有 声明<!DOCTYPE html>
+            return {
+                left: document.documentElement.scrollLeft,
+                top: document.documentElement.scrollTop
+            }
+        }
+        return { //  剩下的肯定是怪异模式的
+            left: document.body.scrollLeft,
+            top: document.body.scrollTop
+        }
+    }
+	
+	function client() {
+        if(window.innerWidth != null){  // ie9 +  最新浏览器
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
+        }
+        else if(document.compatMode === "CSS1Compat"){  // 标准浏览器
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        }
+        return {   // 怪异浏览器
+            width: document.body.clientWidth,
+            height: document.body.clientHeight
+
+        }
+    }
+</script>
+</html>

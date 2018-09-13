@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	    var mobile_flag = isMobile(); // true为手机端，false为pc端
+	    console.log(mobile_flag);
+	    if(mobile_flag){
+			$('html body').append('<span style="font-family: 微软雅黑;font-size: 24px;text-align: center;">暂时不支持手机浏览，请在电脑打开，后面敬请期待</span>');
+	    }else {
+	    	$('html body').append('1111');
+	    }
+	    function isMobile() {
+		    var userAgentInfo = navigator.userAgent;
+		    var mobileAgents = [ "Android", "iPhone", "SymbianOS", "Windows Phone", "iPad","iPod"];
+		    var mobile_flag = false;
+		    for (var v = 0; v < mobileAgents.length; v++) {
+		        if (userAgentInfo.indexOf(mobileAgents[v]) > 0) {
+		            mobile_flag = true;
+		            break;
+		        }
+		    }
+		    var screen_width = window.screen.width;
+		    var screen_height = window.screen.height;    
+		    if(screen_width < 500 && screen_height < 800){
+		        mobile_flag = true;
+		    }
+		    return mobile_flag;
+		}
+	});
+</script>
+</html>

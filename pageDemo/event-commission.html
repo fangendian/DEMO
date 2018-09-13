@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="" id="btn" value="添加" />
+    <ul id="ul1">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+    </ul>
+</body>
+<script type="text/javascript">
+//	事件委托时,一般是给父级元素绑定相应的事件,在通过获取不同的id或者相同的标签来实现相应的功能,可以提高性能,节约运行时间
+	var oBtn = document.getElementById("btn");
+    var oUl = document.getElementById("ul1");
+    var aLi = oUl.getElementsByTagName('li');
+//  oUl.onmouseover = function(e){
+//  	var e = event || window.event;
+//  	var target = e.target || e.srcElement;
+//  	console.log(e);
+//  	console.log(target.nodeName.toLocaleLowerCase());
+//  }
+	function doExchange(arr){
+        var len = arr.length;
+        if(len >= 2){
+            var len1 = arr[0].length;
+            var len2 = arr[1].length;
+            var lenBoth = len1 * len2;
+            var items = new Array(lenBoth);
+            var index = 0;
+            for(var i=0; i<len1; i++){
+                for(var j=0; j<len2; j++){
+                    if(arr[0][i] instanceof Array){
+                        items[index] = arr[0][i].concat(arr[1][j]);
+                    }else{
+                        items[index] = [arr[0][i]].concat(arr[1][j]);
+                    }
+                    index++;
+                }
+            }
+            var newArr = new Array(len - 1);
+            for(var i=2;i<arr.length;i++){
+                newArr[i-1] = arr[i];
+            }
+            newArr[0] = items;
+            return doExchange(newArr);
+        }else{
+            return arr[0];
+        }
+    }
+
+    //
+    var arr = [['a', 'b', 'c'], [1, 2, 3], ['x', 'y', 'z'],['手机'],['颜色','大小']];
+//  var arr1 = [['a','b','c']];
+    console.log(doExchange(arr));
+    
+</script>
+</html>

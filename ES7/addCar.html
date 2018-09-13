@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车特效</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.content{
+				width: 400px;
+				height: 300px;
+				margin: auto;
+				
+			}
+			.list li{
+				float: left;
+				margin: 10px;
+				cursor: pointer;
+			}
+			.list li img{
+				height: 100px;
+				width: 100px;
+			}
+			.list li .name{
+				font-size: 12px;
+				text-align: center;
+			}
+			.list li .price{
+				font-size: 14px;
+				color: red;
+				text-align: center;
+			}
+			.shopp{
+				width: 800px;
+				padding-left: 100px;
+			}
+			
+			#tb tr th{
+				font-size: 14px;
+				color: #122B40;
+				padding: 5px;
+				width: 200px;
+				border: 1px solid #666;
+			}
+			#tb td{
+				border-top: 0;
+				font-size: 16px;
+				color: #101010;
+				padding-left: 45px;
+				border: 1px solid #666;
+			}
+			#tb td img{
+				width:36px;
+				height:36px
+			}
+			#tb .numdit{
+				width: 26px;
+				height: 26px;
+				background-color: #23527C;
+				border-radius: 13px;
+				color: #CCCCCC;
+				font-size: 24px;
+				text-decoration: none;
+				font-weight: bold;
+				display: inline-block;
+				text-align: center;
+				margin-top: 10px;
+				padding-bottom: 10px;
+			}
+			#tb .delect{
+				width: 50px;
+				height: 30px;
+				background-color: red;
+				color: #CCCCCC;
+			}
+			.bottomk{
+				width: 798px;
+				height: 36px;
+				border: 1px solid #666666;
+				margin-left: 100px;
+			}
+			.bottomkLeft{
+				float: left;
+				width: 80px;
+				height: 36px;
+				line-height: 36px;
+				margin-left: 30px;
+				background-color: #204D74;
+				border-radius: 13px;
+			}
+			.bottomkLeft a{
+				text-decoration: none;
+				font-size: 20px;
+				color: #CCCCCC;
+				
+			}
+			.bottomkRight{
+				float: right;
+				width: 200px;
+				height: 36px;
+				line-height: 36px;
+				padding-right: 60px;
+			}
+			.bottomkRight a{
+				text-decoration: none;
+				font-size: 16px;
+				
+			}
+			.bottomkRight span{
+				font-size: 16px;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="content">
+			<ul class="list">
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/1.jpg" />
+					</div>
+					<p class="name">荣耀V10</p>
+					<p class="price">
+						<span>$</span>
+						<span>3000</span>
+					</p>
+				</li>
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/2.jpg" />
+					</div>
+					<p class="name">苹果8</p>
+					<p class="price">
+						<span>$</span>
+						<span>5000</span>
+					</p>
+				</li>
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/3.jpg" />
+					</div>
+					<p class="name">小米MIXS2</p>
+					<p class="price">
+						<span>$</span>
+						<span>3299</span>
+					</p>
+				</li>
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/4.jpg" />
+					</div>
+					<p class="name">联想小新</p>
+					<p class="price">
+						<span>$</span>
+						<span>6299</span>
+					</p>
+				</li>
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/5.jpg" />
+					</div>
+					<p class="name">戴尔</p>
+					<p class="price">
+						<span>$</span>
+						<span>5499</span>
+					</p>
+				</li>
+				<li onclick="addTR(this)">
+					<div>
+						<img src="img/6.jpg" />
+					</div>
+					<p class="name">小米笔记本</p>
+					<p class="price">
+						<span>$</span>
+						<span>5599</span>
+					</p>
+				</li>
+			</ul>
+		</div>
+		<div class="shopp">
+			<table id="tb" cellpadding="0"cellspacing="0">
+				<tr>
+					<th><input type="checkbox" onclick="allCheckbox(this)" id="ipt"/>全选</th>
+					<th>商品图片</th>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品数量</th>
+					<th>编辑</th>
+				</tr>
+				<!--<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<img src="img/1.jpg" />
+					</td>
+					<td>荣耀V10</td>
+					<td>3299</td>
+					<td>
+						<a href="#" class="numdit" onclick="subNum(this)">-</a>
+						<span>1</span>
+						<a href="#" class="numdit" onclick="addNum(this)">+</a>
+					</td>
+					<td>
+						<a href="#" class="delect" onclick="removeTR(this)">删除</a>
+					</td>
+				</tr>-->
+			</table>
+		</div>
+		<div class="bottomk">
+			<div class="bottomkLeft">
+				<a href="#" onclick="removCK()">删除选中</a>
+			</div>
+			<div class="bottomkRight">
+				<a href="#">总计：</a>
+				<span id="total">0</span>
+			</div>			
+		</div>
+		<script>
+			function subNum(a){
+				var numSpan = a.nextElementSibling;
+				var num = parseInt(numSpan.innerHTML);
+				if(num > 1){
+					numSpan.innerHTML = num - 1;
+					money();
+				}
+			}
+			function addNum(a){
+				var numSpan = a.previousElementSibling;
+				numSpan.innerHTML = parseInt(numSpan.innerHTML) + 1;
+				money();
+			}
+			function removeTR(a){
+				var tr = a.parentNode.parentNode;
+				var tBody = tr.parentNode;
+				tBody.removeChild(tr);
+				money();
+			}
+			function addTR(li){
+				var childs = li.children;
+				var imgDiv = childs[0];
+				var img = imgDiv.firstElementChild;
+				var imgsrc = img.src;
+				var nameP = childs[1];
+				var name = nameP.innerHTML;
+				var priceP = childs[2];
+				var priceSpan = priceP.lastElementChild;
+				var price = priceSpan.innerHTML;
+				var tb = document.getElementById("tb");
+				var tBody = tb.firstElementChild;
+				var trs = tBody.children;
+				var index = -1;
+				for(var i = 1; i < trs.length; i++){
+					var cells = trs[i].children;
+					if(name == cells[2].innerHTML){
+						index = i;
+						break;
+					}
+				}
+				if(index == -1){
+					var tr = document.createElement("tr");
+					var checkBoxTd = document.createElement("td");
+					var imgTd = document.createElement("td");
+					var nameTd = document.createElement("td");
+					var priceTd = document.createElement("td");
+					var numTd = document.createElement("td");
+					var deleTd = document.createElement("td");
+					checkBoxTd.innerHTML = "<input type='checkbox' class='inp' />";
+					imgTd.innerHTML = "<img src='" + imgsrc + "' />";
+					nameTd.innerHTML = name;
+					priceTd.innerHTML = price;
+					numTd.innerHTML = "<a href='#' class='numdit' onclick='subNum(this)'>-</a><span>1</span><a href='#' class='numdit' onclick='addNum(this)'>+</a>";
+					deleTd.innerHTML = "<a href='#' class='delect' onclick='removeTR(this)'>删除</a>";
+					tr.appendChild(checkBoxTd);
+					tr.appendChild(imgTd);
+					tr.appendChild(nameTd);
+					tr.appendChild(priceTd);
+					tr.appendChild(numTd);
+					tr.appendChild(deleTd);
+					tBody.appendChild(tr);
+				}else{
+					var cells = trs[index].children;
+					var numSpan = cells[4].children[1];
+					numSpan.innerHTML = parseInt(numSpan.innerHTML) + 1;
+				}
+				money();
+			}
+			function money(){
+				var tb = document.getElementById("tb");
+				var tBody = tb.firstElementChild;
+				var trs = tBody.children;
+				var total = 0;
+				for (var j = 1; j < trs.length; j++) {
+					var childs = trs[j].children;
+					var price = childs[3].innerHTML;
+					var num = childs[4].children[1].innerHTML;
+					total += num * price;
+				}
+				document.getElementById("total").innerHTML = total;
+			}
+			function allCheckbox(ck){
+				var is = document.getElementsByClassName("inp");
+				for (var i = 0; i < is.length;i++) {
+					is[i].checked = ck.checked;
+				}
+			}
+			function removCK(){
+				var is = document.getElementsByClassName("inp");
+				for (var i = 0; i < is.length; i++) {
+					if(is[i].checked == true){
+						var tr = is[i].parentNode.parentNode;
+						var tbody = tr.parentNode;
+						tbody.removeChild(tr);
+						i--;
+					}
+				}
+				money();
+			}
+		</script>
+	</body>
+</html>

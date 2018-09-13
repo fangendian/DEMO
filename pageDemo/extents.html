@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+//		factory
+		function Person(name,age,sex){
+			var o = new Object();
+			o.name = name;
+			o.age = age;
+			o.sex = sex;
+			o.do = function(){
+				console.log('Say high to me!')
+			}
+			return o;
+		}
+		var p = Person('kack',23,'nan');
+		p.do();
+		
+//		constructor
+		function Cat(type,weight,price){
+			this.type = type;
+			this.weight = weight;
+			this.price = price;
+			this.eat = function(){
+				console.log('very !');
+			};
+		}
+		var cat = new Cat('big',8,198);
+		cat.eat();
+		console.log(cat)
+		
+//		constructor+protype
+		function Con(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Con.prototype = {
+			sex: 'female',
+			job: 'Web Site',
+			address: '上海市普陀区',
+			do: function(){
+				console.log('I am ' + this.name + 'I am in ' + this.address)
+			}
+		}
+		var con = new Con('Jack',21);
+		con.do();
+	</script>
+</body>
+</html>

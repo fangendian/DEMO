@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.box {
+				width: 500px;
+				height: 300px;
+				margin: 30px auto;
+				padding: 30px;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+			}
+			.btn {
+				padding: 5px 15px 7px 15px;
+				background: #0B85FF;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				outline: none;
+				opacity: 0.7;
+			}
+			.btn:active {
+				transform: translateY(1px);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<input type="text" id="ipt" value="" />
+			<button class="btn" id="btn">点击</button>
+			<p>asd</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		    
+		var ipt = document.getElementById('ipt'),btn = document.getElementById('btn');
+		btn.onclick = function(){
+			var res = /(.*\/)*([^.]+).*/ig;   //文件名
+			var reg = /\.\w+$/;   //文件后缀
+			var a = reg.exec(ipt.value),b = res.exec(ipt.value);
+			if(b.length > 0){
+				if(a[0] === '.js' && b[2] != 'log'){
+					console.log(111111111);
+				}else {
+					console.log(22222222222);
+				}	
+			}else {
+				console.log(33333);
+			}
+			ipt.value = null;
+		}
+	</script>
+</html>
