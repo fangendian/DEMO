@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<div id='box'>
+      <input type="checkbox"><label>红色</label>
+      <input type="checkbox"><label>黄色</label>
+      <input type="checkbox"><label>绿色</label>
+      <input type="checkbox"><label>青色</label>
+      <input type="checkbox"><label>蓝色</label>
+      <input type="checkbox"><label>紫色</label>
+    </div>
+    <div id='fox'>
+      <input type="checkbox"><label>大号</label>
+      <input type="checkbox"><label>中号</label>
+      <input type="checkbox"><label>小号</label>
+    </div>
+</body>
+	<script type="text/javascript">
+//		避免命名变量全局污染,可将所有命名的变量名放在同一个对象下面,便于维护和开发
+//		其中框架就是这样的代表
+		var baseValue = {
+			nameList: [],
+			endArr: [],
+			numList: [],
+			list: []
+		};
+		var nameList = [],endArr = [],arr = [],numList = [],list = [];
+		var oneValue,twoValue;
+		var box = document.getElementById('box'),fox = document.getElementById('fox');
+		var iptListBox = box.getElementsByTagName('input'),labelListBox = box.getElementsByTagName('label');
+		var iptListFox = fox.getElementsByTagName('input'),labelListFox = fox.getElementsByTagName('label');
+		for(var i = 0; i < iptListBox.length; i++){
+			iptListBox[i].index = i;
+			iptListBox[i].onclick = function(){
+				endArr = [];
+				const that = this;
+				getEndValue(that,labelListBox,arr,numList);
+				console.log(getEndValue(that,labelListBox,arr,numList));
+			};
+		}
+		for(var i = 0; i < iptListFox.length; i++){
+			iptListFox[i].index = i;
+			iptListFox[i].onclick = function(){
+				endArr = [];
+				const that = this;
+				getEndValue(that,labelListFox,nameList,list);
+				console.log(getEndValue(that,labelListFox,nameList,list));
+			};
+		}
+		function sum() {
+			var a = getEndValue(that,labelListBox,arr,numList), b = getEndValue(that,labelListFox,nameList,list);
+			
+		}
+		function getEndValue(that,ele,arr,newArr){
+			if(that.checked){
+				newArr.push(that.index);
+				arr.push(ele[that.index].innerText);
+				arr = removeSame(arr);
+				newArr = removeSame(newArr);
+			}else {
+				for(var j = 0; j < arr.length; j++){
+					if(that.index === newArr[j]){
+						arr.splice(j,1);
+						newArr.splice(j,1);
+						arr = removeSame(arr);
+						newArr = removeSame(newArr);
+					}
+				}
+			}
+			return arr;
+		}
+		function removeSame(arr){
+			var newArr = [];
+			var hash = {};
+			for(var i = 0; i < arr.length; i++){
+				if(!hash[arr[i]]){
+					hash[arr[i]] = true;
+					newArr.push(arr[i]);
+				}
+			}
+			return newArr;
+		}
+		function doExchange(arr){
+	        var len = arr.length;
+	        if(len >= 2){
+	            var len1 = arr[0].length;
+	            var len2 = arr[1].length;
+	            var lenBoth = len1 * len2;
+	            var items = new Array(lenBoth);
+	            var index = 0;
+	            for(var i = 0; i < len1; i++){
+	                for(var j = 0; j < len2; j++){
+	                    if(arr[0][i] instanceof Array){
+	                        items[index] = arr[0][i].concat(arr[1][j]);
+	                    }else{
+	                        items[index] = [arr[0][i]].concat(arr[1][j]);
+	                    }
+	                    index++;
+	                }
+	            }
+	            var newArr = new Array(len - 1);
+	            for(var i=2;i<arr.length;i++){
+	                newArr[i-1] = arr[i];
+	            }
+	            newArr[0] = items;
+	            return doExchange(newArr);
+	        }else{
+	            return arr[0];
+	        }
+	    }
+		
+		function getType(ele){
+			var type = '';
+			if(typeof ele != 'object'){
+				type = typeof ele;
+			}else{
+				if(ele instanceof Array){
+					type = 'array';
+				}else {
+					if(ele instanceof Object){
+						type = 'object';
+					}else {
+						type = null;
+					}
+				}
+			}
+			return type;
+		}
+	</script>
+</html>
